@@ -1,12 +1,12 @@
 from flask import Flask, redirect, url_for, render_template, request
 # from datetime import datetime
-from script import DB_NAME, DB_USER,DB_HOST,DB_PASS
+from script import DB_NAME, DB_USER, DB_HOST, DB_PASS
 import psycopg2.extras
 
 app = Flask(__name__)
 
 conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
-# cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 
 @app.route('/')
@@ -56,14 +56,14 @@ def login():
         def file_saving_process():
             with conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                    # product_name_save = product_name
-                    # product_weight_save = product_weight
+                    product_name_save = product_name
+                    product_weight_save = product_weight
                     # product_name = input("Введите название: ")
                     # user_weight = input("Введите вес: ")
-                    cur.execute("INSERT INTO invent_april (name, weight) VALUES(%s, %s)", ((product_name.lower()), int(product_weight),))
+                    cur.execute("INSERT INTO invent_april (name, weight) VALUES(%s, %s)", ((product_name_save.lower()), int(product_weight_save),))
 
-                    # cur.execute("SELECT * FROM invent_april;")
-                    # print(cur.fetchall())
+                    cur.execute("SELECT * FROM invent_april;")
+                    print(cur.fetchall())
 
             conn.close()
 
@@ -82,11 +82,11 @@ def login():
         # user_and_weight = product_name, product_weight
 
         def contact():
+            request.method == "GET"
             if "save" in request.form:
                 file_saving_process()
                 print("save ok")
-
-                return render_template("/loging.html")
+                return
                     # redirect(url_for("product_name", usr = user_and_weight))
             elif "cancel" in request.form:
                 print("cancel saving process")
@@ -113,7 +113,7 @@ def login():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
     # app.run(host='0.0.0.0')
 
 
