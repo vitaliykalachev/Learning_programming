@@ -1,9 +1,12 @@
 from flask import Flask, redirect, url_for, render_template, request
-# from datetime import datetime
+import os
 from script import DB_NAME, DB_USER, DB_HOST, DB_PASS
 import psycopg2.extras
 
 app = Flask(__name__)
+
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
