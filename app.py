@@ -58,8 +58,7 @@ def login():
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
                     # product_name = input("Введите название: ")
                     # user_weight = input("Введите вес: ")
-                    cur.execute("INSERT INTO invent_april (name, weight) VALUES(%s, %s)",
-                                ((product_name.lower()), int(product_weight),))
+                    cur.execute("INSERT INTO invent_april (name, weight) VALUES(%s, %s)", ((product_name.lower()), int(product_weight),))
 
                     cur.execute("SELECT * FROM invent_april;")
                     print(cur.fetchall())
