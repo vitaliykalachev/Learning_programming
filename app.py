@@ -68,7 +68,7 @@ def login():
                     cur.execute("SELECT * FROM invent_april;")
                     print(cur.fetchall())
 
-            conn.close()
+            # conn.close()
 
 
 
