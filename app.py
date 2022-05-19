@@ -43,22 +43,22 @@ def count_save():
 @app.route("/inventarizaciya", methods=["POST", "GET"])
 def inventarizaciya():
     return login()
-    # if request.method == "POST":
-    #
-    #     # req = request.form
-    #
-    #     # username = req.get("nm")
-    #     # email = req.get("email")
-    #     # password = req.get("nm")
-    #
-    #     if "save" in request.form:
-    #         flash("Сохраняю!", "success")
-    #         return redirect(request.url)
-    #     else:
-    #         flash("Отмена!", "warning")
-    #         return redirect(request.url)
-    #
-    # return render_template("loging.html")
+    if request.method == "POST":
+
+        # req = request.form
+
+        # username = req.get("nm")
+        # email = req.get("email")
+        # password = req.get("nm")
+
+        if "save" in request.form:
+            flash("Сохраняю!", "success")
+            return redirect(request.url)
+        else:
+            flash("Отмена!", "warning")
+            return redirect(request.url)
+
+    return render_template("loging.html")
 
 
 # Message flashing
