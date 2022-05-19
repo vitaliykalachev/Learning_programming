@@ -7,11 +7,11 @@ from list_counting_dobraw import adding_in_lists, contact, file_saving_process_t
 
 app = Flask(__name__)
 
-# DATABASE_URL = os.environ['DATABASE_URL']
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-#
-# conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
-# cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 
 @app.route('/')
@@ -42,23 +42,23 @@ def count_save():
 
 @app.route("/inventarizaciya", methods=["POST", "GET"])
 def inventarizaciya():
-    login()
-    if request.method == "POST":
-
-        # req = request.form
-
-        # username = req.get("nm")
-        # email = req.get("email")
-        # password = req.get("nm")
-
-        if "save" in request.form:
-            flash("Сохраняю!", "success")
-            return redirect(request.url)
-        else:
-            flash("Отмена!", "warning")
-            return redirect(request.url)
-
-    return render_template("loging.html")
+    return login()
+    # if request.method == "POST":
+    #
+    #     # req = request.form
+    #
+    #     # username = req.get("nm")
+    #     # email = req.get("email")
+    #     # password = req.get("nm")
+    #
+    #     if "save" in request.form:
+    #         flash("Сохраняю!", "success")
+    #         return redirect(request.url)
+    #     else:
+    #         flash("Отмена!", "warning")
+    #         return redirect(request.url)
+    #
+    # return render_template("loging.html")
 
 
 # Message flashing
@@ -84,7 +84,7 @@ def sign_up():
     return render_template("sign_up.html")
 
 if __name__ == "__main__":
-    app.secret_key = 'super secret key'
+    app.secret_key = "SECRET_KEY"
 
     app.run(debug=True)
     # app.run(host='0.0.0.0')
