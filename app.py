@@ -59,7 +59,6 @@ def inventarizaciya():
 
 @app.route("/sign-up", methods=["GET", "POST"])
 def sign_up():
-
     if request.method == "POST":
 
         req = request.form
@@ -70,12 +69,12 @@ def sign_up():
 
         if not len(password) >= 10:
             flash("Password length must be at least 10 characters", "warning")
-            return render_template("sign_up.html")
+            return render_template("sign-up.html")
         else:
             flash("Account created!", "success")
-            return render_template("sign_up.html")
+            return redirect(url_for("inventarizaciya"))
 
-    return render_template("sign_up.html")
+    return redirect(url_for("inventarizaciya"))
 
 if __name__ == "__main__":
     app.secret_key = "super secret key"
