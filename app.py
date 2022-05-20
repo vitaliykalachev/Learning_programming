@@ -84,7 +84,7 @@ def sign_up():
     return render_template("sign_up.html")
 
 if __name__ == "__main__":
-    app.secret_key = "super secret key"
+    # app.secret_key = "super secret key"
 
     app.run(debug=True)
     # app.run(host='0.0.0.0')
