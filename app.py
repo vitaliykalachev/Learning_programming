@@ -7,11 +7,11 @@ from list_counting_dobraw import adding_in_lists, contact, file_saving_process_t
 
 app = Flask(__name__)
 
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-
-conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
-cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+# DATABASE_URL = os.environ['DATABASE_URL']
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+#
+# conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+# cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 
 @app.route('/')
