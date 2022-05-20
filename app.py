@@ -74,7 +74,7 @@ def sign_up():
             flash("Account created!", "success")
             return redirect(url_for("inventarizaciya"))
 
-    return redirect(url_for("inventarizaciya"))
+    return redirect(url_for("sign-up.html"))
 
 if __name__ == "__main__":
     app.secret_key = "super secret key"
