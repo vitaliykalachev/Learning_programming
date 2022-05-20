@@ -68,11 +68,11 @@ def sign_up():
         password = req.get("password")
 
         if not len(password) >= 10:
-            return flash("Password length must be at least 10 characters", "warning")
-            # return render_template("sign_up.html")
+            flash("Password length must be at least 10 characters", "warning")
+            return render_template("sign_up.html")
         else:
-            return flash("Account created!", "success")
-            # return render_template("sign_up.html")
+            flash("Account created!", "success")
+            return render_template("sign_up.html")
 
     return render_template("sign_up.html")
 
