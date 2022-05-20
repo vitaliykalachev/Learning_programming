@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template, request
+from flask import Flask, redirect, url_for, render_template, request, flash
 import psycopg2.extras
 import os
 from script import DB_NAME, DB_USER, DB_HOST, DB_PASS
@@ -13,6 +13,16 @@ def login():
     if request.method == "POST":
         product_name = request.form["nm"]
         product_weight = request.form["wt"]
+        # req = request.form
+        #
+        # username = req.get("nm")
+        # if not len(username) >= 2:
+        #     flash("Password length must be at least 10 characters", "warning")
+        #
+        # else:
+        #     flash("Account created!", "success")
+
+
 
         product_weight = product_weight.replace('+', ' ')
 
@@ -40,12 +50,12 @@ def login():
                     product_name_save = product_name
                     product_weight_save = product_weight
 
-                    cur.execute("INSERT INTO inventarizaciya (name, weight) VALUES(%s, %s)", ((product_name_save.lower()), int(product_weight_save),))
+                    cur.execute("INSERT INTO invent_april (name, weight) VALUES(%s, %s)", ((product_name_save.lower()), int(product_weight_save),))
 
-                    cur.execute("SELECT * FROM inventarizaciya;")
+                    cur.execute("SELECT * FROM invent_april;")
                     print(cur.fetchall())
 
-            # conn.close()
+            conn.close()
 
 
 
@@ -65,6 +75,7 @@ def login():
             request.method == "GET"
             if "save" in request.form:
                 file_saving_process()
+
                 print("save ok")
                 return
                     # redirect(url_for("product_name", usr = user_and_weight))
