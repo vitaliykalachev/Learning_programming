@@ -50,9 +50,9 @@ def login():
                     product_name_save = product_name
                     product_weight_save = product_weight
 
-                    cur.execute("INSERT INTO invent_april (name, weight) VALUES(%s, %s)", ((product_name_save.lower()), int(product_weight_save),))
+                    cur.execute("INSERT INTO inventarizaciya (name, weight) VALUES(%s, %s)", ((product_name_save.lower()), int(product_weight_save),))
 
-                    cur.execute("SELECT * FROM invent_april;")
+                    cur.execute("SELECT * FROM inventarizaciya;")
                     print(cur.fetchall())
 
             conn.close()
