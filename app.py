@@ -69,12 +69,12 @@ def sign_up():
 
         if not len(password) >= 10:
             flash("Password length must be at least 10 characters", "warning")
-            return render_template("sign-up.html")
+            return render_template("sign-up")
         else:
             flash("Account created!", "success")
             return redirect(url_for("inventarizaciya"))
 
-    return redirect(url_for("sign-up.html"))
+    return redirect(url_for("sign-up"))
 
 if __name__ == "__main__":
     app.secret_key = "super secret key"
