@@ -1,17 +1,11 @@
 from flask import Flask, redirect, url_for, render_template, request, flash
 import os
-from script import DB_NAME, DB_USER, DB_HOST, DB_PASS
-import psycopg2.extras
 from inventarizaciya import login
 from list_counting_dobraw import adding_in_lists, contact, file_saving_process_to_csv, redirect, url_for
 
 app = Flask(__name__)
 
-# DATABASE_URL = os.environ['DATABASE_URL']
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-#
-# conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
-# cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
 
 
 @app.route('/')
@@ -53,10 +47,10 @@ def inventarizaciya():
 
         if "save" in request.form:
             flash("Сохраняю!", "success")
-            return redirect(request.url)
+            return render_template("loging.html")
         else:
             flash("Отмена!", "warning")
-            return redirect(request.url)
+            return render_template("loging.html")
 
     return render_template("loging.html")
 
@@ -76,10 +70,10 @@ def sign_up():
 
         if not len(password) >= 10:
             flash("Password length must be at least 10 characters", "warning")
-            return redirect(request.url)
+            return render_template("sign_up.html")
         else:
             flash("Account created!", "success")
-            return redirect(request.url)
+            return render_template("sign_up.html")
 
     return render_template("sign_up.html")
 
