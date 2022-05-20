@@ -75,7 +75,6 @@ def login():
             request.method == "GET"
             if "save" in request.form:
                 file_saving_process()
-
                 print("save ok")
                 return
                     # redirect(url_for("product_name", usr = user_and_weight))
