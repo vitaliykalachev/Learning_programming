@@ -87,8 +87,7 @@ if __name__ == "__main__":
 
 @app.route("/usr")
 def user(usr):
-    # f"<h1>{}</h1>"
-    # f"<h1>{}</h1>"
+    f"<h1>{usr}</h1>"
     return render_template("usr.html")
 
 

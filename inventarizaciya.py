@@ -76,11 +76,20 @@ def login():
             if "save" in request.form:
                 file_saving_process()
                 print("save ok")
+
+                flash("Сохраняю!", "success")
+            #
+            #     else:
+            #         flash("Отмена!", "warning")
+            #         return render_template("loging.html")
+            #
+            # return render_template("loging.html"
                 return
                     # redirect(url_for("product_name", usr = user_and_weight))
             elif "cancel" in request.form:
                 print("cancel saving process")
-                return render_template('loging.html')
+                flash("Отмена!", "warning")
+                return
             else:
                 return render_template('loging.html')
 
