@@ -86,6 +86,7 @@ def login():
                 return render_template('loging.html')
 
         contact()
+        flash("Сохраняю!", "success")
         return redirect(url_for("inventarizaciya"))
 
     else:
