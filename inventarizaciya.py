@@ -74,10 +74,11 @@ def login():
         def contact():
             request.method == "GET"
             if "save" in request.form:
+                flash("Сохраняю!", "success")
                 file_saving_process()
                 print("save ok")
 
-                flash("Сохраняю!", "success")
+                # flash("Сохраняю!", "success")
             #
             #     else:
             #         flash("Отмена!", "warning")
