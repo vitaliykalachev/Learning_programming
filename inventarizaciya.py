@@ -85,12 +85,12 @@ def login():
             #         return render_template("loging.html")
             #
             # return render_template("loging.html"
-                return
+                return redirect(url_for("inventarizaciya"))
                     # redirect(url_for("product_name", usr = user_and_weight))
             elif "cancel" in request.form:
                 print("cancel saving process")
                 flash("Отмена!", "warning")
-                return
+                return redirect(url_for("inventarizaciya"))
             else:
                 return render_template('loging.html')
 
