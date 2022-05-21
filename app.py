@@ -36,9 +36,8 @@ def count_save():
 
 @app.route("/inventarizaciya", methods=["POST", "GET"])
 def inventarizaciya():
-    login()
-    flash("Сохраняю!", "success")
-    return
+    return login()
+
     # if request.method == "POST":
     #
     #     # req = request.form
