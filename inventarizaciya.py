@@ -74,23 +74,14 @@ def login():
         def contact():
             request.method == "GET"
             if "save" in request.form:
-                flash("Сохраняю!", "success")
                 file_saving_process()
                 print("save ok")
 
-                # flash("Сохраняю!", "success")
-            #
-            #     else:
-            #         flash("Отмена!", "warning")
-            #         return render_template("loging.html")
-            #
-            # return render_template("loging.html"
-                return redirect(url_for("inventarizaciya"))
+                return
                     # redirect(url_for("product_name", usr = user_and_weight))
             elif "cancel" in request.form:
                 print("cancel saving process")
-                flash("Отмена!", "warning")
-                return redirect(url_for("inventarizaciya"))
+                return render_template('loging.html')
             else:
                 return render_template('loging.html')
 
