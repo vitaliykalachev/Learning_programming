@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "admin/templates/base.html" %}
 
 {%block title %} Login Page {% endblock %}
 
@@ -17,8 +17,10 @@
     <input class="btn btn-outline-dark" type="submit" name="save" value="Сохранить">
     <input class="btn btn-outline-dark" type="submit" name="cancel" value="Отмена">
 
+    <script src="{{ url_for ('static', filename='js/myfunction.js') }}"></script>
   </form>
 
 </center></div>
+
   </div>
 {% endblock %}

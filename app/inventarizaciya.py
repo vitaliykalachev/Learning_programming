@@ -1,10 +1,11 @@
-from flask import Flask, redirect, url_for, render_template, request, flash
+from flask import  redirect, url_for, render_template, request, flash
 import psycopg2.extras
 import os
 from script import DB_NAME, DB_USER, DB_HOST, DB_PASS
 
-# DATABASE_URL = os.environ['DATABASE_URL']
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+os.environ['DATABASE_URL'] = "postgres://atwrtaatphuwev:bbe8f3b93fd8c58cb9ac8c952b4cd9daf74edd1454bec9d83088aaad2d889788@ec2-3-218-171-44.compute-1.amazonaws.com:5432/ddd4mnclae5h30"
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
 cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -54,8 +55,8 @@ def login():
 
                     cur.execute("SELECT * FROM inventarizaciya;")
                     print(cur.fetchall())
-
-            conn.close()
+                    # flash("Сохраняю!", "success")
+            # conn.close()
 
 
 
@@ -76,19 +77,17 @@ def login():
             if "save" in request.form:
                 file_saving_process()
                 print("save ok")
-
-                return
+                return render_template('public/inventarizaciya.html')
                     # redirect(url_for("product_name", usr = user_and_weight))
             elif "cancel" in request.form:
                 print("cancel saving process")
-                return render_template('loging.html')
+                return render_template('public/inventarizaciya.html')
             else:
-                return render_template('loging.html')
+                return render_template('public/inventarizaciya.html')
 
         contact()
-        flash("Сохраняю!", "success")
         return redirect(url_for("inventarizaciya"))
 
     else:
-        return render_template("loging.html")
+        return render_template("public/inventarizaciya.html")
 

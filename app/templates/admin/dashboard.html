@@ -1,0 +1,11 @@
+{% extends "admin/templates/base.html" %}
+
+{% block title %}
+Home Page
+{% endblock %}
+{% block content %}
+<h1 style="color: blue" class =>Привет</h1>
+<h2 class => Это АДМИН сайт</h2>
+<img style="max-width: 500px;" src="{{ url_for('static', filename='img/hello.png') }}" alt="">
+
+{% endblock %}

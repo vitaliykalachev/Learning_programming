@@ -1,0 +1,29 @@
+{% extends "public/templates/base.html" %}
+
+{%block title %} Login Page {% endblock %}
+
+{%block content %}
+<div class="shadow-sm p-3 mb-5 bg-body rounded">
+<div><center>
+
+  <form action="" method="post">
+
+    <p><h5>Имя:</h5></p>
+    <p><input  type="text"  name="nm" required="required" /></p>
+    <p><h5>Фамилия:</h5></p>
+    <p><input  type="text"  name="srnm" required="required" /></p>
+    <p><h5>Баты:</h5><p>
+<!--    <p><h8><em>(можно написать много позиций через пробел или через знак '+')</em></h8></p>-->
+    <p><input  type="text" name="bhts" required="required" /></p>
+    <p><h5>Добро:</h5><p>
+<!--    <p><h8><em>(можно написать много позиций через пробел или через знак '+')</em></h8></p>-->
+    <p><input  type="text" name="dbrw" required="required" /></p>
+
+    <input class="btn btn-outline-dark" type="submit" name="save" value="Сохранить">
+    <input class="btn btn-outline-dark" type="submit" name="cancel" value="Отмена">
+
+  </form>
+
+</center></div>
+  </div>
+{% endblock %}

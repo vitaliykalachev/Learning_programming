@@ -1,0 +1,43 @@
+{% extends "public/templates/base.html" %}
+
+{%block title %} Login Page {% endblock %}
+
+{%block content %}
+<div class="shadow-sm p-3 mb-5 bg-body rounded">
+<div><center>
+
+  <form action="" method="post">
+
+    <p><h4>Название продукта:</h4></p>
+    <p><input  type="text"  name="nm" required="required" /></p>
+    <p><h4>Вес в граммах:</h4><p>
+    <p><h8><em>(можно написать много позиций через пробел или через знак '+')</em></h8></p>
+    <p><input  type="text" name="wt" required="required" /></p>
+
+    <input onclick="myFunction('{{ booking_slot }}')" class="btn btn-outline-dark" type="submit" name="save" value="Сохранить">
+    <input  class="btn btn-outline-dark" type="submit" name="cancel" value="Отмена" >
+
+<!--    <script src="{{ url_for ('static', filename='js/myfunction.js') }}"></script>-->
+
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var txt;
+
+  if (confirm("Cохранить данные?")) {
+    txt = "Данные сохранены!";
+  } else {
+    txt = "Отмена!";
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
+
+  </form>
+
+</center></div>
+
+  </div>
+{% endblock %}
