@@ -86,7 +86,7 @@ def login():
                 return render_template('admin/inventarizaciya.html')
 
         contact()
-        return redirect(url_for("/admin/inventarizaciya"))
+        return redirect(url_for("admin/inventarizaciya"))
 
     else:
         return render_template("admin/inventarizaciya.html")
