@@ -1,4 +1,4 @@
-{% extends "admin/templates/base.html" %}
+{% extends "admin/templates/admin_base.html" %}
 
 {%block title %} Login Page {% endblock %}
 
@@ -14,8 +14,26 @@
     <p><h8><em>(можно написать много позиций через пробел или через знак '+')</em></h8></p>
     <p><input  type="text" name="wt" required="required" /></p>
 
-    <input class="btn btn-outline-dark" type="submit" name="save" value="Сохранить">
-    <input class="btn btn-outline-dark" type="submit" name="cancel" value="Отмена">
+    <input onclick="myFunction('{{ booking_slot }}')" class="btn btn-outline-dark" type="submit" name="save" value="Сохранить">
+    <input  class="btn btn-outline-dark" type="submit" name="cancel" value="Отмена" >
+
+
+
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var txt;
+
+  if (confirm("Cохранить данные?")) {
+    txt = "Данные сохранены!";
+  } else {
+    txt = "Отмена!";
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
 
     <script src="{{ url_for ('static', filename='js/myfunction.js') }}"></script>
   </form>

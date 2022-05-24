@@ -31,4 +31,4 @@ function confirmBooking(elem) {
         }
     }
 
-window.confirm("Сохраняю?");
+//window.confirm("Сохраняю?");

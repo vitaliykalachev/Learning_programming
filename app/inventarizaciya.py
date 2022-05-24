@@ -73,7 +73,7 @@ def login():
         # user_and_weight = product_name, product_weight
 
         def contact():
-            request.method == "GET"
+            request.method == "POST"
             if "save" in request.form:
                 file_saving_process()
                 print("save ok")

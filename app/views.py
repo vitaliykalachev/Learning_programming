@@ -13,7 +13,7 @@ def count_save():
     if request.method == "POST":
         adding_in_lists()
         contact()
-        return redirect(url_for("count_save"))
+        return redirect(url_for("public/count_save"))
     else:
         return render_template("public/count_save.html")
 

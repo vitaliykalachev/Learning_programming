@@ -1,5 +1,5 @@
 from flask import  render_template, request, flash
-from app.inventarizaciya import login
+from app.admin_nventarizaciya import login
 from app.list_counting_dobraw import adding_in_lists, contact, redirect, url_for
 from app import app
 
