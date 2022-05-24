@@ -81,13 +81,13 @@ def login():
                     # redirect(url_for("product_name", usr = user_and_weight))
             elif "cancel" in request.form:
                 print("ADMIN cancel saving process")
-                return render_template('admin/inventarizaciya.html')
+                return render_template('/admin/inventarizaciya.html')
             else:
-                return render_template('admin/inventarizaciya.html')
+                return render_template('/admin/inventarizaciya.html')
 
         contact()
-        return redirect(url_for("admin/inventarizaciya"))
+        return redirect(url_for("/admin/inventarizaciya"))
 
     else:
-        return render_template("admin/inventarizaciya.html")
+        return render_template("/admin/inventarizaciya.html")
 
