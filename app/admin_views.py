@@ -1,5 +1,5 @@
 from flask import  render_template, request, flash
-from app.admin_nventarizaciya import login
+from app.admin_iventarizaciya import login
 from app.list_counting_dobraw import adding_in_lists, contact, redirect, url_for
 from app import app
 
@@ -13,7 +13,7 @@ def admin_count_save():
     if request.method == "POST":
         adding_in_lists()
         contact()
-        return redirect(url_for("count_save"))
+        return redirect(url_for("admin/count_save"))
     else:
         return render_template("admin/count_save.html")
 
