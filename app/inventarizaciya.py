@@ -76,18 +76,18 @@ def login():
             request.method == "POST"
             if "save" in request.form:
                 file_saving_process()
-                print("save ok")
-                return render_template('public/inventarizaciya.html')
-                    # redirect(url_for("product_name", usr = user_and_weight))
+                print("PUBLIC save ok")
+                return
+
             elif "cancel" in request.form:
-                print("cancel saving process")
-                return render_template('public/inventarizaciya.html')
+                print("PUBLIC cancel saving process")
+                return
             else:
                 return render_template('public/inventarizaciya.html')
 
         contact()
-        return redirect(url_for("inventarizaciya"))
+        return
 
     else:
-        return render_template("public/inventarizaciya.html")
+        return
 

@@ -77,17 +77,20 @@ def login():
             if "save" in request.form:
                 file_saving_process()
                 print("ADMIN save ok")
-                return render_template('admin/inventarizaciya.html')
+                return
                     # redirect(url_for("product_name", usr = user_and_weight))
             elif "cancel" in request.form:
+
                 print("ADMIN cancel saving process")
-                return render_template('admin/inventarizaciya.html')
+                return
             else:
                 return render_template('admin/inventarizaciya.html')
 
         contact()
-        return redirect(url_for("admin_inventarizaciya"))
+        return
+
 
     else:
-        return render_template("admin/inventarizaciya.html")
+        return
+
 

@@ -35,7 +35,18 @@ def count_save():
 
 @app.route("/public/inventarizaciya", methods=["POST", "GET"])
 def inventarizaciya():
-    return login()
+    login()
+    if "save" in request.form:
+        flash("Данные сохранены", "success")
+        print("FLASH PUBLIC save ok")
+        return redirect(url_for("inventarizaciya"))
+        # redirect(url_for("product_name", usr = user_and_weight))
+    elif "cancel" in request.form:
+        flash("Отмена", "warning")
+        print("FLASH PUBLIC cancel saving process")
+        return redirect(url_for("inventarizaciya"))
+    else:
+        return render_template('public/inventarizaciya.html')
 
 
 @app.route("/public/sign-up", methods=["GET", "POST"])
@@ -56,6 +67,8 @@ def sign_up():
             return render_template("public/sign_up.html")
 
     return render_template("public/sign_up.html")
+
+
 
 @app.route("/public/<usr>")
 def user(usr):
