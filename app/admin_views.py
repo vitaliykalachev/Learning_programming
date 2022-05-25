@@ -26,12 +26,13 @@ def admin_inventarizaciya():
     if "save" in request.form:
         flash("Данные сохранены", "success")
         print("FLASH ADMIN save ok")
-        return redirect(url_for("admin_inventarizaciya"))
+        return render_template('admin/inventarizaciya.html')
         # redirect(url_for("product_name", usr = user_and_weight))
     elif "cancel" in request.form:
         flash("Отмена", "warning")
         print("FLASH ADMIN cancel saving process")
-        return redirect(url_for("admin_inventarizaciya"))
+        return render_template('admin/inventarizaciya.html')
+        # return redirect(url_for("admin_inventarizaciya"))
     else:
         return render_template('admin/inventarizaciya.html')
 
