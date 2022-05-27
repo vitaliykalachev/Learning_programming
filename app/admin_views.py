@@ -1,4 +1,4 @@
-from flask import  render_template, request, flash
+from flask import  render_template, request, flash, jsonify, make_response
 from app.admin_iventarizaciya import login
 from app.list_counting_dobraw import adding_in_lists, contact, redirect, url_for
 from app import app
@@ -25,6 +25,7 @@ def admin_inventarizaciya():
     login()
     if "save" in request.form:
         flash("Данные сохранены", "success")
+
         print("FLASH ADMIN save ok")
         return redirect(url_for("admin_inventarizaciya"))
         # return render_template('admin/inventarizaciya.html')
@@ -60,7 +61,7 @@ def admin_sign_up():
 @app.route("/admin/<usr>")
 def admin_user(usr):
     f"<h1>{usr}</h1>"
-    return render_template("admin/usr.html")
+    return render_template("admin/usr.html", usr=usr)
 
 @app.route("/jinja")
 def jinja():
@@ -116,3 +117,62 @@ def jinja():
 @app.template_filter("clean_date")
 def clean_date(dt):
     return dt.strftime("%d %b %Y")
+
+
+users = {
+    "mitsuhiko" : {
+        "name" : "Armin Ronacher",
+        "bio" : "Creator of the Flask framework",
+        "twitter_handle" : "@mitsuhiko"
+    },
+
+    "gvanrossum" : {
+
+        "name" : "Guido Van Rossum",
+        "bio" : "Creator of the Python programming language",
+        "twitter_handle" : "@gvanrossum"
+    },
+
+    "elonmusk" : {
+        "name" : "Elon Musk",
+        "bio" : "technology entrepreneur, investor, engineer",
+        "twitter_handle" : "@elonmusk"
+
+    }
+
+}
+
+@app.route("/profile/<username>")
+def profile(username):
+
+    user = None
+    if username in users:
+        user = users[username]
+
+
+    return render_template("admin/profile.html", username=username,user=user)
+
+
+@app.route("/multiple/<foo>/<bar>/<baz>")
+def multi(foo, bar, baz):
+    return f"foo is {foo}, bar is {bar}, baz is {baz}"
+
+@app.route("/json", methods=["POST"])
+def json():
+
+    if request.is_json:
+
+        req = request.get_json()
+        response = {
+            "message" : "JSON received",
+            "name" : req.get("name")
+        }
+
+        res = make_response(jsonify(response), 200)
+
+        return res
+
+    else:
+
+        res = make_response(jsonify({"message" : "No JSON received"}), 400)
+        return res
