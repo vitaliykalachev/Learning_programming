@@ -68,7 +68,7 @@ def adding_in_lists():
                     dobraw = all_dobraws_counting_end
 
                     cur.execute("INSERT INTO dobraw_count (name, surname, bht, dobraw) VALUES(%s, %s, %s, %s)",
-                                ((name_save.lower()), (surname_save.lower()),
+                                ((name_save.capitalize()), (surname_save.capitalize()),
                                  int(bhts), float(dobraw)))
 
                     cur.execute("SELECT * FROM dobraw_count;")
