@@ -1,0 +1,23 @@
+{% extends "admin/templates/admin_base.html" %}
+{% import "macros/input_macros.html" as im %}
+
+{% block title %} Jinja {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Цитаты</h1>
+            <hr>
+
+            <h4>Дао Дэ Цзин</h4>
+            <hr>
+            <p>{{ mylist2 }}</p>
+            <button action="/admin/random_quote" href="/admin/random_quote">Click me</button>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

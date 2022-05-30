@@ -8,25 +8,28 @@ DB_PASS = "bbe8f3b93fd8c58cb9ac8c952b4cd9daf74edd1454bec9d83088aaad2d889788"
 
 
 
-# conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
 
 # with conn:
 #     with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
 #         # name = input("Введите название: ")
 #         # user_weight = input("Введите вес: ")
 #         cur.execute(
-#             """CREATE TABLE inventarizaciya(
+#             """CREATE TABLE dobraw_count(
 #             id serial PRIMARY KEY,
-#             name varchar(100) NOT NULL,
-#             weight varchar(30) NOT NULL);"""
-#         )
+#             name varchar(50) NOT NULL,
+#             surname varchar(50) NOT NULL,
+#             bht varchar(30) NOT NULL,
+#             dobraw varchar(30) NOT NULL
+#             );"""
+#                     )
 #         # cur.execute("INSERT INTO invent_april (name, weight) VALUES(%s, %s)", ((name.lower()), int(user_weight),))
 #
-#         cur.execute("SELECT * FROM inventarizaciya;")
+#         cur.execute("SELECT * FROM dobraw_count;")
 #         print(cur.fetchall())
 #
 # conn.close()
-
+#
 
 
 

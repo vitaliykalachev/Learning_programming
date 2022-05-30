@@ -14,15 +14,6 @@ def login():
     if request.method == "POST":
         product_name = request.form["nm"]
         product_weight = request.form["wt"]
-        # req = request.form
-        #
-        # username = req.get("nm")
-        # if not len(username) >= 2:
-        #     flash("Password length must be at least 10 characters", "warning")
-        #
-        # else:
-        #     flash("Account created!", "success")
-
 
 
         product_weight = product_weight.replace('+', ' ')

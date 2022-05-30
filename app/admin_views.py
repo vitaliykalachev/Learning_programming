@@ -1,8 +1,11 @@
 from flask import  render_template, request, flash, jsonify, make_response
 from app.admin_iventarizaciya import login
-from app.list_counting_dobraw import adding_in_lists, contact, redirect, url_for
+from app.list_counting_dobraw import adding_in_lists, redirect, url_for
 from app import app
 from datetime import datetime
+import random
+import app.random_quote as raqu
+
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
@@ -11,12 +14,33 @@ def admin_dashboard():
 
 @app.route("/admin/count_save", methods=["POST", "GET"])
 def admin_count_save():
-    if request.method == "POST":
-        adding_in_lists()
-        contact()
+    adding_in_lists()
+    if "save" in request.form:
+        flash("Данные сохранены", "success")
+
+        print("FLASH ADMIN COUNT save ok")
+        return redirect(url_for("admin_count_save"))
+        # return render_template('admin/inventarizaciya.html')
+        # redirect(url_for("product_name", usr = user_and_weight))
+    elif "cancel" in request.form:
+        flash("Отмена", "warning")
+        print("FLASH ADMIN COUNT cancel saving process")
+        # return render_template('admin/inventarizaciya.html')
         return redirect(url_for("admin_count_save"))
     else:
-        return render_template("admin/count_save.html")
+        return render_template('admin/count_save.html')
+
+
+
+
+    # return render_template("admin/count_save.html")
+    # return redirect(url_for("admin_count_save"))
+    # if request.method == "POST":
+    #
+    #     contact()
+    #     return redirect(url_for("admin_count_save"))
+    # else:
+    #     return render_template("admin/count_save.html")
 
 
 
@@ -63,10 +87,23 @@ def admin_user(usr):
     f"<h1>{usr}</h1>"
     return render_template("admin/usr.html", usr=usr)
 
+
+
+@app.route("/random_quote")
+def random_quote():
+
+    mylist2 = random.choice(raqu.mylist)
+
+    return render_template("admin/random_quote.html",
+                           mylist2=mylist2,)
 @app.route("/jinja")
 def jinja():
 
+
+
+
     my_name = "Vitaliy"
+
 
     age= 25
 
@@ -110,8 +147,7 @@ def jinja():
                            my_name=my_name, age=age,
                         langs=langs, friends=friends, colours=colours,
                            cool=cool, GitRemote=GitRemote, repeat=repeat,
-                           my_remote=my_remote, date=date, my_html=my_html, suspicious=suspicious
-
+                           my_remote=my_remote, date=date, my_html=my_html, suspicious=suspicious,
                            )
 
 @app.template_filter("clean_date")

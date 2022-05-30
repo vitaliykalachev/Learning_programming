@@ -1,24 +1,27 @@
 from flask import  render_template, request, flash
 from app.inventarizaciya import login
-from app.list_counting_dobraw import adding_in_lists, contact, redirect, url_for
+from app.list_counting_dobraw import adding_in_lists, redirect, url_for
 from app import app
 
-@app.route('/')
+@app.route('/public/index')
 def index():
     return render_template("public/index.html")
 
 
 @app.route("/public/count_save", methods=["POST", "GET"])
 def count_save():
-    if request.method == "POST":
-        adding_in_lists()
-        contact()
-        return redirect(url_for("public/count_save"))
-    else:
-        return render_template("public/count_save.html")
+    adding_in_lists()
+    # if request.method == "POST":
+    #
+    #     contact()
+    #     return redirect(url_for("public/count_save"))
+    # else:
+    #     return render_template("public/count_save.html")
 
 
-
+@app.route("/public/admin_password")
+def admin_password():
+    return render_template("public/admin_password.html")
 
 # @app.route("/count_save", methods=["POST", "GET"])
 # def couunt_save_add_in_list():
