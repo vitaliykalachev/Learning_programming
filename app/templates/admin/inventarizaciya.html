@@ -36,7 +36,16 @@
 
 <!--onclick="myFunction('{{ booking_slot }}')"-->
 
-
+ {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div id='hideMe' class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                <span>{{ message }}</span>
+<!--                <div id='hideMe'>Wait for it...</div>-->
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
 <p id="demo"></p>
 
 <script>

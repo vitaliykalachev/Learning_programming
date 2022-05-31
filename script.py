@@ -25,8 +25,8 @@ conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=D
 #                     )
 #         # cur.execute("INSERT INTO invent_april (name, weight) VALUES(%s, %s)", ((name.lower()), int(user_weight),))
 #
-#         cur.execute("SELECT * FROM dobraw_count;")
-#         print(cur.fetchall())
+        # cur.execute("SELECT * FROM dobraw_count;")
+        # cur.fetchall()
 #
 # conn.close()
 #
@@ -95,3 +95,22 @@ conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=D
 # cur.close()
 
 # conn.close()
+
+# import pandas as pd
+# import requests
+#
+# url = "https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp.csv"
+# s = requests.get(url).content
+# c = pd.read_csv(s)
+
+# import pandas as pd
+# from flask import request
+# import ssl
+# import certifi
+# ssl._create_default_https_context = ssl._create_unverified_context
+# url="https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp"
+# url(request, context=ssl.create_default_context(cafile=certifi.where()))
+#
+# c=pd.read_csv(url)
+#
+# print(c)

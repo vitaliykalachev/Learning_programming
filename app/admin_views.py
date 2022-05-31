@@ -1,11 +1,13 @@
-from flask import  render_template, request, flash, jsonify, make_response
+from flask import  render_template, request, flash, jsonify, make_response, get_flashed_messages
 from app.admin_iventarizaciya import login
 from app.list_counting_dobraw import adding_in_lists, redirect, url_for
 from app import app
-from datetime import datetime
+from datetime import datetime, timedelta
 import random
 import app.random_quote as raqu
-
+from script import conn
+import psycopg2
+import pandas as pd
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
@@ -15,16 +17,27 @@ def admin_dashboard():
 @app.route("/admin/count_save", methods=["POST", "GET"])
 def admin_count_save():
     adding_in_lists()
-    if "save" in request.form:
-        flash("Данные сохранены", "success")
 
+    if "save" in request.form:
+
+        flash(u"Данные сохранены", "success")
+
+        # get_flashed_messages()
         print("FLASH ADMIN COUNT save ok")
-        return redirect(url_for("admin_count_save"))
+        redirect(url_for("admin_count_save",))
+        return render_template('admin/count_save.html')
         # return render_template('admin/inventarizaciya.html')
         # redirect(url_for("product_name", usr = user_and_weight))
     elif "cancel" in request.form:
-        flash("Отмена", "warning")
-        print("FLASH ADMIN COUNT cancel saving process")
+        with conn:
+            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                cur.execute("SELECT * FROM dobraw_count;")
+                df = pd.DataFrame
+                pandas_heroku = df(cur.fetchall())
+                print(pandas_heroku)
+                flash(f" Отмена {pandas_heroku}", "warning")
+
+                print("FLASH ADMIN COUNT cancel saving process")
         # return render_template('admin/inventarizaciya.html')
         return redirect(url_for("admin_count_save"))
     else:
@@ -75,6 +88,7 @@ def admin_sign_up():
 
         if not len(password) >= 10:
             flash("Password length must be at least 10 characters", "warning")
+
             return render_template("admin/sign_up.html")
         else:
             flash("Account created!", "success")
@@ -93,7 +107,7 @@ def admin_user(usr):
 def random_quote():
 
     mylist2 = random.choice(raqu.mylist)
-
+    flash(u'Invalid password provided', 'error')
     return render_template("admin/random_quote.html",
                            mylist2=mylist2,)
 @app.route("/jinja")
