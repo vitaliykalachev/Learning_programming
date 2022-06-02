@@ -44,8 +44,8 @@ def login():
         #     if i == True:
         #         return user_and_weight()
         print(product_name, product_weight)
-        all_products_name_weight= product_name + " " + product_weight
-        flash(f"Данные \n : {all_products_name_weight}", "success")
+        # all_products_name_weight= product_name + " " + product_weight
+        # flash(f"Данные \n : {all_products_name_weight}", "success")
         def file_saving_process():
             with conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:

@@ -103,7 +103,7 @@ conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=D
 # s = requests.get(url).content
 # c = pd.read_csv(s)
 
-# import pandas as pd
+import pandas as pd
 # from flask import request
 # import ssl
 # import certifi
@@ -114,3 +114,13 @@ conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=D
 # c=pd.read_csv(url)
 #
 # print(c)
+
+# import requests
+# import csv
+# url = 'https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp.csv'
+# r = requests.get(url)
+# text = r.iter_lines()
+# reader = csv.reader(text, delimiter=',')
+#
+# print(text)
+
