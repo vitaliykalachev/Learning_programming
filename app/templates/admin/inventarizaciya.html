@@ -15,11 +15,11 @@
     <p><h8><em>(можно написать много позиций через пробел или через знак '+')</em></h8></p>
     <p><i class="bi bi-heart-fill">
 
-    <input  type="text" name="wt" required="required" /></i></p>
+    <input type="text" name="wt" required="required" /></i></p>
 
     <input  class="btn btn-outline-dark px-3" type="submit" name="save" value="Сохранить">
     <input  class="btn btn-outline-dark ml-3 px-4" type="submit" name="cancel" value="Отмена" >
-
+    <button class="btn btn-success" onclick="window.open('https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp','_blank')"> Вся таблица</button>
 
     <datalist id="ice-cream-flavors">
       <option value="Шоколад">
@@ -36,16 +36,16 @@
 
 <!--onclick="myFunction('{{ booking_slot }}')"-->
 
- {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-            {% for category, message in messages %}
-            <div id='hideMe' class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                <span>{{ message }}</span>
-<!--                <div id='hideMe'>Wait for it...</div>-->
-            </div>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
+<!-- {% with messages = get_flashed_messages(with_categories=true) %}-->
+<!--            {% if messages %}-->
+<!--            {% for category, message in messages %}-->
+<!--            <div id='hideMe' class="alert alert-{{ category }} alert-dismissible fade show" role="alert">-->
+<!--                <span>{{ message }}</span>-->
+<!--&lt;!&ndash;                <div id='hideMe'>Wait for it...</div>&ndash;&gt;-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--            {% endif %}-->
+<!--            {% endwith %}-->
 <p id="demo"></p>
 
 <script>

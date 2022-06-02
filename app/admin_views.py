@@ -31,9 +31,9 @@ def admin_count_save():
     elif "cancel" in request.form:
         with conn:
             with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("SELECT * FROM dobraw_count;")
+                cur.execute("SELECT * FROM dobraw_count ;")
                 df = pd.DataFrame
-                pandas_heroku = df(cur.fetchall())
+                pandas_heroku = df(cur.fetchone())
                 print(pandas_heroku)
                 flash(f" Отмена {pandas_heroku}", "warning")
 
