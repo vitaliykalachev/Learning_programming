@@ -141,8 +141,8 @@ import pandas as pd
 # for row in cr:
 #     print(row)
 
-import requests
-from pandas.io.json import json_normalize
+# import requests
+# from pandas.io.json import json_normalize
 # import pandas as pd
 # import urllib3
 # import certifi
