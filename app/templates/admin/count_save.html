@@ -18,12 +18,19 @@
     <p><h5>Добро:</h5><p>
 <!--    <p><h8><em>(можно написать много позиций через пробел или через знак '+')</em></h8></p>-->
     <p><input  type="text" name="dbrw" required="required" /></p>
-
+<div x-data="{ open: false }">
     <input class="btn btn-outline-dark" type="submit" name="save" value="Сохранить">
     <input class="btn btn-outline-dark" type="submit" name="cancel" value="Отмена">
 
+    <button class="btn btn-outline-dark ml-3 px-3 "  @click="open = ! open">Таблица</button>
+    <div x-show="open" @click.outside="open = false" ><p>{{my_name}}</p></div>
+</div>
+
+      <p>{{my_name}}</p>
   </form>
 
 </center></div>
   </div>
+
+
 {% endblock %}

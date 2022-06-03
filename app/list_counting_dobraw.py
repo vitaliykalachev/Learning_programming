@@ -89,7 +89,7 @@ def adding_in_lists():
         contact()
     else:
         return
-    return
+
         # redirect(url_for("count_save"))
 
 

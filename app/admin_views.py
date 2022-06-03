@@ -18,6 +18,7 @@ def admin_dashboard():
 def admin_count_save():
     adding_in_lists()
 
+
     if "save" in request.form:
 
         flash(u"Данные сохранены", "success")
@@ -29,19 +30,27 @@ def admin_count_save():
         # return render_template('admin/inventarizaciya.html')
         # redirect(url_for("product_name", usr = user_and_weight))
     elif "cancel" in request.form:
+        flash(" Отмена ", "warning")
+        print("FLASH ADMIN COUNT cancel saving process")
+        return redirect(url_for("admin_count_save"))
+    elif "table" in request.form:
         with conn:
             with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
                 cur.execute("SELECT * FROM dobraw_count ;")
                 df = pd.DataFrame
-                pandas_heroku = df(cur.fetchone())
+                pandas_heroku = df(cur.fetchall())
                 print(pandas_heroku)
-                flash(f" Отмена {pandas_heroku}", "warning")
 
-                print("FLASH ADMIN COUNT cancel saving process")
-        # return render_template('admin/inventarizaciya.html')
-        return redirect(url_for("admin_count_save"))
+        return render_template('admin/count_save.html', pandas_heroku=pandas_heroku)
+
     else:
         return render_template('admin/count_save.html')
+
+    my_name = "Vitaliy"
+
+    return render_template('admin/count_save.html', pandas_heroku=pandas_heroku, my_name=my_name)
+# def table():
+
 
 
 

@@ -1,6 +1,6 @@
 {% extends "admin/templates/admin_base.html" %}
 
-{%block title %} Login Page {% endblock %}
+{%block title %} Инвентаризация {% endblock %}
 
 {%block content %}
 <div class="shadow-sm p-3 mb-5 bg-body rounded">
@@ -16,10 +16,16 @@
     <p><i class="bi bi-heart-fill">
 
     <input type="text" name="wt" required="required" /></i></p>
-
+<div x-data="{ open: false }">
     <input  class="btn btn-outline-dark px-3" type="submit" name="save" value="Сохранить">
     <input  class="btn btn-outline-dark ml-3 px-4" type="submit" name="cancel" value="Отмена" >
-    <button class="btn btn-success" onclick="window.open('https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp','_blank')"> Вся таблица</button>
+    <button class="btn btn-outline-success" onclick="window.open('https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp','_blank')"> Вся таблица</button>
+
+    <button class="btn btn-outline-dark ml-3 px-3 " @click="open = ! open">Toggle</button>
+    <div x-show="open" @click.outside="open = false" ><iframe allowfullscreen="true" height="500"  width="1000" loading="eager"  src="https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp" ></iframe></div>
+</div>
+
+
 
     <datalist id="ice-cream-flavors">
       <option value="Шоколад">

@@ -124,3 +124,35 @@ import pandas as pd
 #
 # print(text)
 
+# import csv
+# import urllib3
+# import certifi
+#
+# http = urllib3.PoolManager(
+#     cert_reqs='CERT_REQUIRED',
+#     ca_certs=certifi.where()
+# )
+# r = http.('GET', 'https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp.csv')
+#
+# cr = csv.reader(r)
+#
+# print(cr)
+
+# for row in cr:
+#     print(row)
+
+import requests
+from pandas.io.json import json_normalize
+# import pandas as pd
+# import urllib3
+# import certifi
+#
+# http = urllib3.PoolManager(
+#     cert_reqs='CERT_REQUIRED',
+#     ca_certs=certifi.where()
+# )
+# r = http.request('GET', 'https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp.csv')
+#
+#
+# df = pd.read_csv(r)
+# print(df)

@@ -13,14 +13,14 @@ body {
 
 
 #hideMe {
-    -moz-animation: cssAnimation 200ms ease-in 5s both;
+    -moz-animation: cssAnimation 400ms ease-in-out 5s both;
     /* Firefox */
-    -webkit-animation: cssAnimation 200ms ease-in 5s both;
+    -webkit-animation: cssAnimation 500ms ease-in-out 5s both;
     /* Safari and Chrome */
-    -o-animation: cssAnimation 200ms ease-in 5s both;
+    -o-animation: cssAnimation 400ms ease-in-out 5s both;
     /* Opera */
-    animation: cssAnimation 200ms ease-in 5s both;
-    -webkit-animation-fill-mode: both;
+    animation: cssAnimation linear 500ms ease-in-out  both;
+    -webkit-animation-fill-mode:  both;
     animation-fill-mode: both;
 }
 @keyframes cssAnimation{
@@ -67,3 +67,10 @@ body {
     }
 }
 
+iframe:focus {
+  outline: none;
+}
+
+iframe[seamless] {
+  display: block;
+}
