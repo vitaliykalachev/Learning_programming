@@ -3,11 +3,12 @@
 
 {% block title %} Table Elements{% endblock %}
 {% block content %}
-<h1 style="color: blue" class =>Extract data from PostgreSQL</h1>
+
 <h4 class =></h4>
-<img style="max-width: 100px;" src="{{ url_for('static', filename='img/IMG_6605.jpeg') }}" alt="">
+
 
 <div class="container">
+    <h1 style="color: black" class =>Extract data </h1>
     <div class="row">
         <div class="col">
 
@@ -29,11 +30,14 @@
 
             </table>
 
-            <p><h3>{{ all_bhts_count() }}</h3></p>
+            <p><h3>Всего Бат: {{ all_bhts }}</h3></p>
             <hr>
-            <p><h3>{{ all_dobraw_count() }}</h3></p>
+            <p><h3>Всего Добра: {{ all_dobraw }}</h3></p>
             <hr>
+
         </div>
+
+
     </div>
 
 </div>

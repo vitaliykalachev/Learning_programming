@@ -22,7 +22,6 @@ def admin_dashboard():
 def admin_count_save():
     adding_in_lists()
 
-
     if "save" in request.form:
 
         flash(u"Данные сохранены", "success")
@@ -37,37 +36,13 @@ def admin_count_save():
         flash(" Отмена ", "warning")
         print("FLASH ADMIN COUNT cancel saving process")
         return redirect(url_for("admin_count_save"))
-    elif "table" in request.form:
-        with conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur.execute("SELECT * FROM dobraw_count ;")
-                df = pd.DataFrame
-                pandas_heroku = df(cur.fetchall())
-                print(pandas_heroku)
 
-        return
             # render_template('admin/count_save.html', pandas_heroku=pandas_heroku)
-
     else:
         return render_template('admin/count_save.html')
 
-    my_name = "Vitaliy"
+    return render_template('admin/count_save.html')
 
-    return render_template('admin/count_save.html', pandas_heroku=pandas_heroku, my_name=my_name)
-# def table():
-
-
-
-
-
-    # return render_template("admin/count_save.html")
-    # return redirect(url_for("admin_count_save"))
-    # if request.method == "POST":
-    #
-    #     contact()
-    #     return redirect(url_for("admin_count_save"))
-    # else:
-    #     return render_template("admin/count_save.html")
 
 
 
@@ -349,31 +324,20 @@ def extract_data_dobraw():
 
             datas = cur.fetchall()
 
+            cur.execute("SELECT sum(cast(bht AS INTEGER)) FROM dobraw_count;")
+            bhts = cur.fetchall()
+            all_bhts = bhts[0][0]
+
+            cur.execute("SELECT sum(cast(dobraw AS FLOAT)) FROM dobraw_count;")
+            dobraw = cur.fetchall()
+            all_dobraw = dobraw[0][0]
 
             # for data in datas:
             #     return(str(data[0]), str(data[1]), data[2], data[3],)
             print("Data selected successfully")
 
 
-    def all_bhts_count():
-        with conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-                cur.execute("SELECT sum(cast(bht AS INTEGER)) FROM dobraw_count;")
-                bhts = cur.fetchall()
-                all_bhts = bhts[0][0]
-        return all_bhts
-    def all_dobraw_count():
-        with conn:
-            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
-                cur.execute("SELECT sum(cast(dobraw AS FLOAT)) FROM dobraw_count;")
-                dobraw = cur.fetchall()
-                all_dobraw = dobraw[0][0]
-        return all_dobraw
     return render_template("admin/extract_data.html", headings=headings, datas=datas,
-                           all_bhts_count=all_bhts_count, all_dobraw_count=all_dobraw_count
+                           all_bhts=all_bhts, all_dobraw=all_dobraw
                            )
 
