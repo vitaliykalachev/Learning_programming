@@ -1,16 +1,20 @@
-from flask import  render_template, request, flash, jsonify, make_response, get_flashed_messages
+from flask import  render_template, request, flash, jsonify, make_response, redirect
 from app.admin_iventarizaciya import login
-from app.list_counting_dobraw import adding_in_lists, redirect, url_for
+from app.list_counting_dobraw import adding_in_lists, url_for
 from app import app
 from datetime import datetime, timedelta
+from app.random_quote import mylist
 import random
 import app.random_quote as raqu
 from script import conn
 import psycopg2
 import pandas as pd
+import os
+from werkzeug.utils import secure_filename
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
+    print(f" Flask ENV is set to: {app.config['ENV']}")
     return render_template("admin/dashboard.html")
 
 
@@ -41,7 +45,8 @@ def admin_count_save():
                 pandas_heroku = df(cur.fetchall())
                 print(pandas_heroku)
 
-        return render_template('admin/count_save.html', pandas_heroku=pandas_heroku)
+        return
+            # render_template('admin/count_save.html', pandas_heroku=pandas_heroku)
 
     else:
         return render_template('admin/count_save.html')
@@ -84,6 +89,9 @@ def admin_inventarizaciya():
     else:
         return render_template('admin/inventarizaciya.html')
 
+    # iframe = "https://data.heroku.com/dataclips/cnmkkemnkztlaqxpyykjtgdygzxm"
+    #
+    # return render_template('admin/inventarizaciya.html', iframe=iframe)
 
 @app.route("/admin/sign-up", methods=["GET", "POST"])
 def admin_sign_up():
@@ -115,10 +123,10 @@ def admin_user(usr):
 @app.route("/random_quote")
 def random_quote():
 
-    mylist2 = random.choice(raqu.mylist)
-    flash(u'Invalid password provided', 'error')
+
+    mylist1 = random.choice(mylist)
     return render_template("admin/random_quote.html",
-                           mylist2=mylist2,)
+                           mylist1=mylist1,)
 @app.route("/jinja")
 def jinja():
 
@@ -235,3 +243,137 @@ def json():
 
         res = make_response(jsonify({"message" : "No JSON received"}), 400)
         return res
+
+
+@app.route("/guestbook")
+def guestbook():
+    return render_template("admin/guestbook.html")
+
+@app.route("/guestbook/create-entry", methods=["POST"])
+def create_entry():
+
+    req = request.get_json()
+
+    print(req)
+
+    res = make_response(jsonify({"message": "JSON received"}), 200)
+
+    return res
+
+
+
+app.config["IMAGE_UPLOADS"] = "/Users/new/PycharmProjects/inventarizaciya_final/app/static/img/uploads"
+app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PNG", "JPG", "JPEG", "GIF"]
+app.config["MAX_IMAGE_FILESIZE"] = 0.5*1024*1024
+
+def allowed_image(filename):
+    if not "." in filename:
+        return False
+
+    ext = filename.rsplit(".", 1)[1]
+
+    if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+        return True
+    else:
+        return False
+
+
+def allowed_image_filesize(filesize):
+
+    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+        return True
+    else:
+        return False
+
+
+@app.route("/upload-image", methods=["GET", "POST"])
+def upload_image():
+
+    if request.method == "POST":
+
+        if request.files:
+
+            # if allowed_image_filesize(request.cookies.get("filesize")):
+            #     print("File exceeded maximum size")
+            #     return redirect(request.url)
+
+            image = request.files["image"]
+
+            if image.filename == "":
+                print("Image must have a filename")
+                return redirect(request.url)
+
+            if not allowed_image(image.filename):
+                print("That image extension is not allowed")
+                return redirect(request.url)
+
+            else:
+                filename = secure_filename(image.filename)
+                image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+
+            print("Image saved")
+            print(image)
+
+            return redirect(request.url)
+
+    return render_template("admin/upload_image.html")
+
+@app.route("/admin/product_count")
+def product_count():
+    return render_template("admin/product_count.html")
+
+@app.route("/admin/table")
+def table_element():
+    headings = ( "Name", "Role",	"Salary")
+
+    data = (
+        ("Rolf Smith",	"Software Engineer",	"$42000"),
+        ("Jonny Depp",	"Film Actor",	"$1000000000"),
+        ("Steve Jobs",	"Apple Founder",	"$200000000"),
+        ("Vitaliy Kalachev",	"Software Engineer",	"$100000"),
+        ("Tom Hanks", "Film Actor", "$1000000000"),
+        ("Artur Sita", "Englithment person", "$200000000000000000000000000"),
+        ("Elon Musk", "Tesla Founder", "$1000000000"),
+            )
+
+    return render_template("admin/table.html", headings=headings, data=data)
+
+@app.route("/admin/extract_data")
+def extract_data_dobraw():
+    headings = ("Name", "Surname", "Bhts", "Dobraw")
+    with conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+            cur.execute("SELECT NAME, SURNAME, BHT, DOBRAW FROM dobraw_count;")
+
+            datas = cur.fetchall()
+
+
+            # for data in datas:
+            #     return(str(data[0]), str(data[1]), data[2], data[3],)
+            print("Data selected successfully")
+
+
+    def all_bhts_count():
+        with conn:
+            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+                cur.execute("SELECT sum(cast(bht AS INTEGER)) FROM dobraw_count;")
+                bhts = cur.fetchall()
+                all_bhts = bhts[0][0]
+        return all_bhts
+    def all_dobraw_count():
+        with conn:
+            with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+                cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+                cur.execute("SELECT sum(cast(dobraw AS FLOAT)) FROM dobraw_count;")
+                dobraw = cur.fetchall()
+                all_dobraw = dobraw[0][0]
+        return all_dobraw
+    return render_template("admin/extract_data.html", headings=headings, datas=datas,
+                           all_bhts_count=all_bhts_count, all_dobraw_count=all_dobraw_count
+                           )
+

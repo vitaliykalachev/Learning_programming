@@ -16,13 +16,17 @@
     <p><i class="bi bi-heart-fill">
 
     <input type="text" name="wt" required="required" /></i></p>
-<div x-data="{ open: false }">
+
     <input  class="btn btn-outline-dark px-3" type="submit" name="save" value="Сохранить">
     <input  class="btn btn-outline-dark ml-3 px-4" type="submit" name="cancel" value="Отмена" >
-    <button class="btn btn-outline-success" onclick="window.open('https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp','_blank')"> Вся таблица</button>
+    <button class="btn btn-outline-success" onclick="window.open('https://data.heroku.com/dataclips/cnmkkemnkztlaqxpyykjtgdygzxm','_blank')"> Вся таблица</button>
+<div x-data="{ open: false }">
+    <button class="btn btn-outline-dark ml-3 px-3 " @click="open = true">Toggle</button>
+    <div x-show="open" @click.outside="open = false">тест</div>
 
-    <button class="btn btn-outline-dark ml-3 px-3 " @click="open = ! open">Toggle</button>
-    <div x-show="open" @click.outside="open = false" ><iframe allowfullscreen="true" height="500"  width="1000" loading="eager"  src="https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp" ></iframe></div>
+
+<!--    <h3 align="center"><a href="/">Stumble</a></h3>-->
+
 </div>
 
 

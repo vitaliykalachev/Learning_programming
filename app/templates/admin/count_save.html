@@ -23,13 +23,16 @@
     <input class="btn btn-outline-dark" type="submit" name="cancel" value="Отмена">
 
     <button class="btn btn-outline-dark ml-3 px-3 "  @click="open = ! open">Таблица</button>
-    <div x-show="open" @click.outside="open = false" ><p>{{my_name}}</p></div>
+    <div x-show="open" @click.outside="open = false" ><p>{{ pandas_heroku }}</p></div>
+
+
 </div>
 
-      <p>{{my_name}}</p>
+
   </form>
 
 </center></div>
+    <p>{{ my_name }}</p>
   </div>
 
 

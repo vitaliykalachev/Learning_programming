@@ -1,0 +1,41 @@
+{% extends "admin/templates/admin_base.html" %}
+<!--{% from "admin/macros.html" import data_table %}-->
+
+{% block title %} Table Elements{% endblock %}
+{% block content %}
+<h1 style="color: blue" class =>Extract data from PostgreSQL</h1>
+<h4 class =></h4>
+<img style="max-width: 100px;" src="{{ url_for('static', filename='img/IMG_6605.jpeg') }}" alt="">
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+                       <table class="table">
+                <tr class="table__header">
+                    {% for header in headings %}
+                    <th class="table__cell">{{ header }}</th>
+                    {% endfor %}
+                </tr>
+                {% for data in datas %}
+                <tr class="table__row">
+                    {% for cell in data %}
+
+                    <td class="table__cell">{{ cell }}</td>
+
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+
+            </table>
+
+            <p><h3>{{ all_bhts_count() }}</h3></p>
+            <hr>
+            <p><h3>{{ all_dobraw_count() }}</h3></p>
+            <hr>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

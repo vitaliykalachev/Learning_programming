@@ -156,3 +156,6 @@ import pandas as pd
 #
 # df = pd.read_csv(r)
 # print(df)
+
+import os
+os.urandom(24)

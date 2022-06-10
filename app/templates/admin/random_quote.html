@@ -13,8 +13,14 @@
 
             <h4>Дао Дэ Цзин</h4>
             <hr>
-            <p>{{ mylist2 }}</p>
-            <button action="/admin/random_quote" href="/admin/random_quote">Click me</button>
+            <div x-data="{ open: false }">
+                <div x-init="mylist1 = random.choice(mylist)">
+            <button align="center"   class="btn btn-outline-dark ml-3 px-3 " @click="open = ! open ">Toggle</button>
+            <div x-show="open"  @click.outside="open = false" >{{ mylist1 }}</div>
+                </div>
+
+            <h3 align="center"><a class="btn btn-outline-dark ml-3 px-3 " href="/random_quote">Обновить</a></h3>
+
 
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
