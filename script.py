@@ -85,77 +85,18 @@ conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=D
 # with conn:
 #     with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
 #         # cur.execute("SELECT * FROM student WHERE id = %s",(1,))
-#         cur.execute("SELECT * FROM student;")
-#         print(cur.fetchall())
-        # print(cur.fetchone()["name"])
+#         cur.execute("DELETE FROM inventarizaciya;")
+#
+
         # cur.execute("INSERT INTO student (name) VALUES(%s)", ("Brad",))
 
 # conn.commit()
-#
+
 # cur.close()
 
 # conn.close()
 
-# import pandas as pd
-# import requests
-#
-# url = "https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp.csv"
-# s = requests.get(url).content
-# c = pd.read_csv(s)
 
-import pandas as pd
-# from flask import request
-# import ssl
-# import certifi
-# ssl._create_default_https_context = ssl._create_unverified_context
-# url="https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp"
-# url(request, context=ssl.create_default_context(cafile=certifi.where()))
-#
-# c=pd.read_csv(url)
-#
-# print(c)
 
-# import requests
-# import csv
-# url = 'https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp.csv'
-# r = requests.get(url)
-# text = r.iter_lines()
-# reader = csv.reader(text, delimiter=',')
-#
-# print(text)
-
-# import csv
-# import urllib3
-# import certifi
-#
-# http = urllib3.PoolManager(
-#     cert_reqs='CERT_REQUIRED',
-#     ca_certs=certifi.where()
-# )
-# r = http.('GET', 'https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp.csv')
-#
-# cr = csv.reader(r)
-#
-# print(cr)
-
-# for row in cr:
-#     print(row)
-
-# import requests
-# from pandas.io.json import json_normalize
-# import pandas as pd
-# import urllib3
-# import certifi
-#
-# http = urllib3.PoolManager(
-#     cert_reqs='CERT_REQUIRED',
-#     ca_certs=certifi.where()
-# )
-# r = http.request('GET', 'https://data.heroku.com/dataclips/nlickfqedupilzpkruxbhuxxwkfp.csv')
-#
-#
-# df = pd.read_csv(r)
-# print(df)
-
-import os
-os.urandom(24)
+# import os
+# os.urandom(24)
