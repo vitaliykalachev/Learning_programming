@@ -1,14 +1,12 @@
-from flask import  render_template, request, flash, jsonify, make_response, redirect
+from flask import  render_template, request, flash, jsonify, make_response, redirect, url_for
 from app.admin_iventarizaciya import login
-from app.list_counting_dobraw import adding_in_lists, url_for
+from app.list_counting_dobraw_admin import adding_in_lists
 from app import app
-from datetime import datetime, timedelta
-from app.random_quote import mylist
+from datetime import datetime
+from app.dao_random_quote import mylist
 import random
-import app.random_quote as raqu
 from script import conn
 import psycopg2
-import pandas as pd
 import os
 from werkzeug.utils import secure_filename
 
@@ -26,18 +24,17 @@ def admin_count_save():
 
         flash(u"Данные сохранены", "success")
 
-        # get_flashed_messages()
+
         print("FLASH ADMIN COUNT save ok")
         redirect(url_for("admin_count_save",))
         return render_template('admin/count_save.html')
-        # return render_template('admin/inventarizaciya.html')
-        # redirect(url_for("product_name", usr = user_and_weight))
+
     elif "cancel" in request.form:
         flash(" Отмена ", "warning")
         print("FLASH ADMIN COUNT cancel saving process")
         return redirect(url_for("admin_count_save"))
 
-            # render_template('admin/count_save.html', pandas_heroku=pandas_heroku)
+
     else:
         return render_template('admin/count_save.html')
 
@@ -51,11 +48,9 @@ def admin_inventarizaciya():
     login()
     if "save" in request.form:
         flash("Данные сохранены", "success")
-
         print("FLASH ADMIN save ok")
         return redirect(url_for("admin_inventarizaciya"))
-        # return render_template('admin/inventarizaciya.html')
-        # redirect(url_for("product_name", usr = user_and_weight))
+
     elif "cancel" in request.form:
         flash("Отмена", "warning")
         print("FLASH ADMIN cancel saving process")
@@ -64,9 +59,6 @@ def admin_inventarizaciya():
     else:
         return render_template('admin/inventarizaciya.html')
 
-    # iframe = "https://data.heroku.com/dataclips/cnmkkemnkztlaqxpyykjtgdygzxm"
-    #
-    # return render_template('admin/inventarizaciya.html', iframe=iframe)
 
 @app.route("/admin/sign-up", methods=["GET", "POST"])
 def admin_sign_up():
@@ -97,8 +89,6 @@ def admin_user(usr):
 
 @app.route("/random_quote")
 def random_quote():
-
-
     mylist1 = random.choice(mylist)
     return render_template("admin/random_quote.html",
                            mylist1=mylist1,)
@@ -341,3 +331,8 @@ def extract_data_dobraw():
                            all_bhts=all_bhts, all_dobraw=all_dobraw
                            )
 
+@app.route("/admin/delivery_counting")
+def admin_delivery_counting():
+    todo_list= Todo.query.all()
+
+    return render_template("admin/delivery_counting.html", todo_list=todo_list)

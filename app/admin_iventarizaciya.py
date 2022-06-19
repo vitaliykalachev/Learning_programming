@@ -1,4 +1,4 @@
-from flask import  redirect, url_for, render_template, request, flash
+from flask import render_template, request
 import psycopg2.extras
 import os
 from script import DB_NAME, DB_USER, DB_HOST, DB_PASS
@@ -14,86 +14,45 @@ def login():
     if request.method == "POST":
         product_name = request.form["nm"]
         product_weight = request.form["wt"]
-        # req = request.form
-        #
-        # username = req.get("nm")
-        # if not len(username) >= 2:
-        #     flash("Password length must be at least 10 characters", "warning")
-        #
-        # else:
-        #     flash("Account created!", "success")
-
-
-
         product_weight = product_weight.replace('+', ' ')
 
-        def max_numbers(product_weight):
+        def max_numbers(product_weight): #sum replace ","
             return sum([float(i) for i in product_weight.replace(',', '.').split()])
 
         all_weight = max_numbers(product_weight)
 
         def all_weight_numbers(all_weight, dec=0):
             prc = "{:." + str(dec) + "f}"  # first cast decimal as str
-            # str format output is {:.3f}
             return prc.format(all_weight)
 
         product_weight = all_weight_numbers(all_weight)
-
-        # user_and_weight = product_name, user_weight
-        # for i in user_and_weight():
-        #     if i == True:
-        #         return user_and_weight()
         print(product_name, product_weight)
-        # all_products_name_weight= product_name + " " + product_weight
-        # flash(f"Данные \n : {all_products_name_weight}", "success")
-        def file_saving_process():
+
+
+        def file_saving_process(): #file saving process in PostgreSQL Heroku database
             with conn:
                 with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
                     product_name_save = product_name
                     product_weight_save = product_weight
-
                     cur.execute("INSERT INTO inventarizaciya (name, weight) VALUES(%s, %s)", ((product_name_save.lower()), int(product_weight_save),))
-
                     cur.execute("SELECT * FROM inventarizaciya;")
                     print(cur.fetchall())
 
-            # conn.close()
 
-
-
-            # name_save = product_name.lower()
-            # weight_save = user_weight
-            # filename1 = datetime.now().strftime("%Y%m%d-%H%M%S")
-            #
-            # f = open(f"/Users/new/PycharmProjects/inventarizaciya_final/templates/files/{filename1}.csv", "w")
-            #
-            # f.write(f"\n {name_save}  {weight_save}")
-            #
-            # f.close()
-
-        # user_and_weight = product_name, product_weight
-
-        def contact():
+        def contact(): #request from html request form
             request.method == "POST"
             if "save" in request.form:
                 file_saving_process()
                 print("ADMIN save ok")
                 return
-                    # redirect(url_for("product_name", usr = user_and_weight))
             elif "cancel" in request.form:
-
                 print("ADMIN cancel saving process")
                 return
             else:
                 return render_template('admin/inventarizaciya.html')
-
         contact()
-
         return
-
 
     else:
         return
 
-    # print("еще раз" + login)
-    # return

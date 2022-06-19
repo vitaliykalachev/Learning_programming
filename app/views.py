@@ -1,7 +1,15 @@
-from flask import  render_template, request, flash
+from flask import  render_template, request, flash,  redirect, url_for, make_response, jsonify
 from app.inventarizaciya import login
-from app.list_counting_dobraw import adding_in_lists, redirect, url_for
+from app.list_counting_dobraw_public import adding_in_lists
 from app import app
+from datetime import datetime
+from app.dao_random_quote import mylist
+import random
+from script import conn
+import psycopg2
+import os
+from werkzeug.utils import secure_filename
+
 
 @app.route('/public/index')
 def index():
@@ -11,30 +19,29 @@ def index():
 @app.route("/public/count_save", methods=["POST", "GET"])
 def count_save():
     adding_in_lists()
-    # if request.method == "POST":
-    #
-    #     contact()
-    #     return redirect(url_for("public/count_save"))
-    # else:
-    #     return render_template("public/count_save.html")
+
+    if "save" in request.form:
+        flash(u"Данные сохранены", "success")
+        # get_flashed_messages()
+        print("FLASH PUBLIC COUNT save ok")
+        redirect(url_for("count_save" ))
+        return render_template('public/count_save.html')
+
+    elif "cancel" in request.form:
+        flash(" Отмена ", "warning")
+        print("FLASH PUBLIC COUNT cancel saving process")
+        return redirect(url_for("count_save"))
+
+    else:
+        return render_template('public/count_save.html')
+
+    return render_template('public/count_save.html')
 
 
 @app.route("/public/admin_password")
 def admin_password():
     return render_template("public/admin_password.html")
 
-# @app.route("/count_save", methods=["POST", "GET"])
-# def couunt_save_add_in_list():
-#     return adding_in_lists()
-#
-# @app.route("/count_save", methods=["POST", "GET"])
-# def couunt_save_data():
-#     return contact()
-# @app.route('/public/inventarizaciya', methods=["POST"])
-# def collect():
-#     if request.method =="POST":
-#         userInput = request.form.get("userInput")
-#     return render_template('public/inventarizaciya.html',userInput=userInput)
 
 @app.route("/public/inventarizaciya", methods=["POST", "GET"])
 def inventarizaciya():
@@ -43,33 +50,14 @@ def inventarizaciya():
         flash("Данные сохранены", "success")
         print("FLASH PUBLIC save ok")
         return redirect(url_for("inventarizaciya"))
-        # redirect(url_for("product_name", usr = user_and_weight))
+
     elif "cancel" in request.form:
         flash("Отмена", "warning")
         print("FLASH PUBLIC cancel saving process")
+
         return redirect(url_for("inventarizaciya"))
     else:
         return render_template('public/inventarizaciya.html')
-
-
-@app.route("/public/sign-up", methods=["GET", "POST"])
-def sign_up():
-    if request.method == "POST":
-
-        req = request.form
-
-        username = req.get("username")
-        email = req.get("email")
-        password = req.get("password")
-
-        if not len(password) >= 10:
-            flash("Password length must be at least 10 characters", "warning")
-            return render_template("public/sign_up.html")
-        else:
-            flash("Account created!", "success")
-            return render_template("public/sign_up.html")
-
-    return render_template("public/sign_up.html")
 
 
 
@@ -77,3 +65,39 @@ def sign_up():
 def user(usr):
     f"<h1>{usr}</h1>"
     return render_template("public/usr.html")
+
+@app.route("/public/random_quote")
+def public_random_quote():
+
+    mylist1 = random.choice(mylist)
+    return render_template("public/random_quote.html",
+                           mylist1=mylist1,)
+
+
+@app.route("/public/extract_data")
+def extract_data_dobraw_public():
+    headings = ("Name", "Surname", "Bhts", "Dobraw")
+    with conn:
+        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
+            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+            cur.execute("SELECT NAME, SURNAME, BHT, DOBRAW FROM dobraw_count;")
+
+            datas = cur.fetchall()
+
+            cur.execute("SELECT sum(cast(bht AS INTEGER)) FROM dobraw_count;")
+            bhts = cur.fetchall()
+            all_bhts = bhts[0][0]
+
+            cur.execute("SELECT sum(cast(dobraw AS FLOAT)) FROM dobraw_count;")
+            dobraw = cur.fetchall()
+            all_dobraw = dobraw[0][0]
+
+            # for data in datas:
+            #     return(str(data[0]), str(data[1]), data[2], data[3],)
+            print("Data selected successfully")
+
+
+    return render_template("public/extract_data.html", headings=headings, datas=datas,
+                           all_bhts=all_bhts, all_dobraw=all_dobraw
+                           )
