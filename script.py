@@ -7,6 +7,8 @@ DB_USER = "atwrtaatphuwev"
 DB_PASS = "bbe8f3b93fd8c58cb9ac8c952b4cd9daf74edd1454bec9d83088aaad2d889788"
 
 
+DATABASE_URL = os.environ['DATABASE_URL'] = "postgres://atwrtaatphuwev:bbe8f3b93fd8c58cb9ac8c952b4cd9daf74edd1454bec9d83088aaad2d889788@ec2-3-218-171-44.compute-1.amazonaws.com:5432/ddd4mnclae5h30"
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 conn = psycopg2.connect(dbname = DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
 

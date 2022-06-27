@@ -307,8 +307,8 @@ def table_element():
 def extract_data_dobraw():
     headings = ("Name", "Surname", "Bhts", "Dobraw")
     with conn:
-        with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cur:
-            cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        with conn.cursor as cur:
+            cur = conn.cursor
 
             cur.execute("SELECT NAME, SURNAME, BHT, DOBRAW FROM dobraw_count;")
 
