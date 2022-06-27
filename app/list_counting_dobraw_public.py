@@ -65,7 +65,7 @@ def adding_in_lists():
                 print("ADMIN cancel COUNT saving process")
                 return
             else:
-                return render_template('admin/count_save.html')
+                return render_template('public/count_save.html')
         contact()
     else:
         return

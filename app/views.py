@@ -1,19 +1,18 @@
-from flask import  render_template, request, flash,  redirect, url_for, make_response, jsonify
+from flask import  render_template, request, flash,  redirect, url_for
 from app.inventarizaciya import login
 from app.list_counting_dobraw_public import adding_in_lists
 from app import app
-from datetime import datetime
 from app.dao_random_quote import mylist
 import random
 from script import conn
 import psycopg2
-import os
-from werkzeug.utils import secure_filename
+
 
 
 @app.route('/public/index')
 def index():
     return render_template("public/index.html")
+
 
 
 @app.route("/public/count_save", methods=["POST", "GET"])
@@ -22,14 +21,11 @@ def count_save():
 
     if "save" in request.form:
         flash(u"Данные сохранены", "success")
-        # get_flashed_messages()
-        print("FLASH PUBLIC COUNT save ok")
         redirect(url_for("count_save" ))
         return render_template('public/count_save.html')
 
     elif "cancel" in request.form:
         flash(" Отмена ", "warning")
-        print("FLASH PUBLIC COUNT cancel saving process")
         return redirect(url_for("count_save"))
 
     else:
@@ -74,6 +70,8 @@ def public_random_quote():
                            mylist1=mylist1,)
 
 
+
+
 @app.route("/public/extract_data")
 def extract_data_dobraw_public():
     headings = ("Name", "Surname", "Bhts", "Dobraw")
@@ -93,8 +91,6 @@ def extract_data_dobraw_public():
             dobraw = cur.fetchall()
             all_dobraw = dobraw[0][0]
 
-            # for data in datas:
-            #     return(str(data[0]), str(data[1]), data[2], data[3],)
             print("Data selected successfully")
 
 

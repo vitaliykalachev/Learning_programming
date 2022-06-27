@@ -5,74 +5,51 @@
 {%block content %}
 <div class="shadow-sm p-3 mb-5 bg-body rounded">
 
-<div><center>
+    <div>
+        <center>
 
-  <form action="" method="post">
-    <p><h4>Название продукта:</h4></p>
-    <p><i class="bi bi-yin-yang" >
+            <form action="" method="post">
+                <p><h4>Название продукта:</h4></p>
+                <p><i class="bi bi-yin-yang">
+                </i><input list="ice-cream-flavors" id="ice-cream-choice" type="text" name="nm" required="required"/>
+                </p>
+                <p><h4>Вес в граммах:</h4>
+                <p>
+                <p>
+                    <h8><em>(можно написать много позиций через пробел или через знак '+')</em></h8>
+                </p>
+                <p><i class="bi bi-heart-fill">
+                    <input type="text" name="wt" required="required"/></i></p>
+                <input class="btn btn-outline-dark px-3" type="submit" name="save" value="Сохранить">
+                <input class="btn btn-outline-dark ml-3 px-4" type="submit" name="cancel" value="Отмена">
+                <button class="btn btn-outline-success"
+                        onclick="window.open('https://data.heroku.com/dataclips/cnmkkemnkztlaqxpyykjtgdygzxm','_blank')">
+                    Вся таблица
+                </button>
 
-    </i><input list="ice-cream-flavors" id="ice-cream-choice" type="text"  name="nm" required="required" /></p>
-    <p><h4>Вес в граммах:</h4><p>
-    <p><h8><em>(можно написать много позиций через пробел или через знак '+')</em></h8></p>
-    <p><i class="bi bi-heart-fill">
+                <!--    <h3 align="center"><a href="/">Stumble</a></h3>-->
 
-    <input type="text" name="wt" required="required" /></i></p>
-
-    <input  class="btn btn-outline-dark px-3" type="submit" name="save" value="Сохранить">
-    <input  class="btn btn-outline-dark ml-3 px-4" type="submit" name="cancel" value="Отмена" >
-    <button class="btn btn-outline-success" onclick="window.open('https://data.heroku.com/dataclips/cnmkkemnkztlaqxpyykjtgdygzxm','_blank')"> Вся таблица</button>
-
-
-<!--    <h3 align="center"><a href="/">Stumble</a></h3>-->
-
-</div>
-
-
+    </div>
 
     <datalist id="ice-cream-flavors">
-      <option value="Шоколад">
-      <option value="Кокос">
-      <option value="Банан">
-      <option value="Клубника">
-      <option value="Ваниль">
-      <option value="Мука">
-      <option value="Масло">
-      <option value="Яблоко">
-      <option value="Огурцы">
-      <option value="Помидоры">
+        <option value="Шоколад">
+        <option value="Кокос">
+        <option value="Банан">
+        <option value="Клубника">
+        <option value="Ваниль">
+        <option value="Мука">
+        <option value="Масло">
+        <option value="Яблоко">
+        <option value="Огурцы">
+        <option value="Помидоры">
     </datalist>
 
-<!--onclick="myFunction('{{ booking_slot }}')"-->
-
-<!-- {% with messages = get_flashed_messages(with_categories=true) %}-->
-<!--            {% if messages %}-->
-<!--            {% for category, message in messages %}-->
-<!--            <div id='hideMe' class="alert alert-{{ category }} alert-dismissible fade show" role="alert">-->
-<!--                <span>{{ message }}</span>-->
-<!--&lt;!&ndash;                <div id='hideMe'>Wait for it...</div>&ndash;&gt;-->
-<!--            </div>-->
-<!--            {% endfor %}-->
-<!--            {% endif %}-->
-<!--            {% endwith %}-->
-<p id="demo"></p>
-
-<script>
-function myFunction() {
-  var txt;
-
-  if (confirm("Cохранить данные?")) {
-    txt = "Данные сохранены!";
-  } else {
-    txt = "Отмена!";
-  }
-  document.getElementById("demo").innerHTML = txt;
-}
-</script>
 
     <script src="{{ url_for ('static', filename='js/myfunction.js') }}"></script>
-  </form>
+    </form>
 
-</center></div>
+    </center>
+</div>
 
-  </div>
+</div>
 {% endblock %}

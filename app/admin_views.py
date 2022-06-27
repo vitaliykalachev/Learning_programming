@@ -322,8 +322,6 @@ def extract_data_dobraw():
             dobraw = cur.fetchall()
             all_dobraw = dobraw[0][0]
 
-            # for data in datas:
-            #     return(str(data[0]), str(data[1]), data[2], data[3],)
             print("Data selected successfully")
 
 
